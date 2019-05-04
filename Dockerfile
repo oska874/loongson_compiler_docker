@@ -36,15 +36,23 @@ RUN sed -i.bak s/archive.ubuntu.com/mirror.tuna.tsinghua.edu.cn/g /etc/apt/sourc
   git
 
 RUN locale-gen en_US.UTF-8 && update-locale
+RUN cd /opt && \
+    wget ftp://ftp.loongnix.org/loongsonpi/toolchain/gcc-4.4-gnu_pmon.tar.gz && \
+    wget ftp://ftp.loongnix.org/loongsonpi/toolchain/gcc-4.9.3-64-gnu_kernel.tar.gz && \
+    tar -xvf gcc-4.4-gnu_pmon.tar.gz && \
+    tar -xvf gcc-4.9.3-64-gnu_kernel.tar.gz && \
+    rm gcc-4.9.3-64-gnu_kernel.tar.gz gcc-4.4-gnu_pmon.tar.gz && \
+    mv opt/* . && \
+    rmdir opt
 
 #make a loongson user
 RUN adduser --disabled-password --gecos '' loongson && \
   usermod -aG sudo loongson && \
   echo "loongson ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-ARG GCC_PATH
+#ARG GCC_PATH
 
-COPY ${GCC_PATH} /opt/
+#COPY ${GCC_PATH} /opt/
 
 # run the install
 #RUN chmod a+x -R /opt/gcc-4.4-gnu \ 
