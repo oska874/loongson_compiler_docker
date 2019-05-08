@@ -31,17 +31,17 @@ RUN sed -i.bak s/archive.ubuntu.com/mirror.tuna.tsinghua.edu.cn/g /etc/apt/sourc
   xutils-dev \
   mtd-utils \
   tmux \
-  bc \
   net-tools \
-  git
+  git \
+  bc
 
 RUN locale-gen en_US.UTF-8 && update-locale
 RUN cd /opt && \
-    wget ftp://ftp.loongnix.org/loongsonpi/toolchain/gcc-4.4-gnu_pmon.tar.gz && \
-    wget ftp://ftp.loongnix.org/loongsonpi/toolchain/gcc-4.9.3-64-gnu_kernel.tar.gz && \
-    tar -xvf gcc-4.4-gnu_pmon.tar.gz && \
-    tar -xvf gcc-4.9.3-64-gnu_kernel.tar.gz && \
-    rm gcc-4.9.3-64-gnu_kernel.tar.gz gcc-4.4-gnu_pmon.tar.gz && \
+    wget ftp://ftp.loongnix.org/embedd/ls3a/toolchain/gcc-4.4-gnu.tar.gz && \
+    wget ftp://ftp.loongnix.org/embedd/ls3a/toolchain/gcc-4.9.3-64-gnu.tar.gz && \
+    tar -xf gcc-4.4-gnu.tar.gz && \
+    tar -xf gcc-4.9.3-64-gnu.tar.gz && \
+    rm gcc-4.9.3-64-gnu.tar.gz gcc-4.4-gnu.tar.gz && \
     mv opt/* . && \
     rmdir opt
 
